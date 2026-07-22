@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Путешествие к Самости — Аделя Лоскутова</title>
+<style>
+  :root{
+    --bg: #14110f;
+    --bg2: #1b1712;
+    --card: #221c17;
+    --beige: #e8ddc9;
+    --brown: #a98a63;
+    --brown-dim: #7d6852;
+    --emerald: #2fd48b;
+    --sapphire: #4fa3f7;
+    --tourmaline: #ff7fb0;
+    --text-dim: #b9ad9a;
+    --border: #33291f;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background: var(--bg);
+    color: var(--beige);
+    font-family: 'Georgia', 'Times New Roman', serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  .script{
+    font-family: 'Brush Script MT', 'Segoe Script', cursive;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .container{max-width:1100px; margin:0 auto; padding:0 24px;}
+  section{padding:100px 0; position:relative;}
+  h1,h2,h3{font-weight:400; letter-spacing:0.5px;}
+  .eyebrow{
+    text-transform:uppercase; letter-spacing:3px; font-size:12px;
+    color: var(--brown); margin-bottom:16px; font-family: Georgia, serif;
+  }
+  .gem-text{
+    background: linear-gradient(90deg, var(--emerald), var(--sapphire), var(--tourmaline));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+
+  /* reveal-on-scroll */
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .8s ease, transform .8s ease;}
+  .reveal.visible{opacity:1; transform:translateY(0);}
+
+  /* ===== HEADER / NAV ===== */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(20,17,15,0.85); backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav{display:flex; align-items:center; justify-content:space-between; padding:16px 24px; max-width:1100px; margin:0 auto;}
+  .brand{font-size:18px; letter-spacing:2px; color:var(--beige);}
+  .nav-cta{
+    background:linear-gradient(90deg, var(--emerald), var(--sapphire));
+    color:#0e0e0e; padding:10px 22px; border-radius:30px; font-size:14px;
+    font-family: Georgia, serif; transition: transform .2s ease, box-shadow .2s ease;
+    white-space:nowrap;
+  }
+  .nav-cta:hover{transform:translateY(-2px); box-shadow:0 6px 20px rgba(79,163,247,0.3);}
+
+  /* ===== HERO ===== */
+  .hero{
+    min-height:100vh; display:flex; align-items:center;
+    padding-top:110px;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(47,212,139,0.08), transparent 40%),
+      radial-gradient(circle at 80% 30%, rgba(79,163,247,0.08), transparent 40%),
+      radial-gradient(circle at 50% 90%, rgba(255,127,176,0.06), transparent 40%),
+      var(--bg);
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:60px; align-items:center;
+  }
+  .hero h1{font-size:44px; line-height:1.25; margin-bottom:20px;}
+  .hero .quote{
+    font-family: 'Brush Script MT', 'Segoe Script', cursive;
+    font-size:26px; color:var(--brown); margin:24px 0; line-height:1.5;
+  }
+  .hero p.lead{color:var(--text-dim); font-size:18px; margin-bottom:32px; max-width:520px;}
+  .cta-primary{
+    display:inline-block; background:linear-gradient(90deg, var(--emerald), var(--sapphire));
+    color:#0e0e0e; padding:18px 38px; border-radius:40px; font-size:17px;
+    box-shadow:0 8px 30px rgba(47,212,139,0.25);
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .cta-primary:hover{transform:translateY(-3px); box-shadow:0 12px 40px rgba(47,212,139,0.4);}
+  .cta-secondary{
+    display:inline-block; border:1px solid var(--brown-dim); color:var(--beige);
+    padding:17px 32px; border-radius:40px; font-size:15px; margin-left:16px;
+    transition: border-color .2s ease, background .2s ease;
+  }
+  .cta-secondary:hover{border-color:var(--emerald); background:rgba(47,212,139,0.06);}
+
+  .hero-photo{
+    position:relative; border-radius:16px; overflow:hidden;
+    aspect-ratio:3/4; background:var(--card); border:1px solid var(--border);
+    display:flex; align-items:center; justify-content:center; text-align:center;
+  }
+  .hero-photo .ph-label{color:var(--brown-dim); font-size:14px; padding:20px;}
+  .hero-photo::after{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(160deg, transparent 60%, rgba(79,163,247,0.15));
+    pointer-events:none;
+  }
+
+  .stats-row{
+    display:flex; gap:40px; margin-top:48px; flex-wrap:wrap;
+  }
+  .stat{}
+  .stat .num{font-size:34px; color:var(--emerald); font-weight:600; display:block;}
+  .stat.sapphire .num{color:var(--sapphire);}
+  .stat.tourmaline .num{color:var(--tourmaline);}
+  .stat .label{font-size:13px; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;}
+
+  /* ===== SECTION generic ===== */
+  .section-title{font-size:34px; margin-bottom:20px;}
+  .section-sub{color:var(--text-dim); font-size:17px; max-width:640px; margin-bottom:56px;}
+
+  /* about */
+  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:flex-start;}
+  .badge-title{
+    display:inline-block; background:rgba(169,138,99,0.15); border:1px solid var(--brown-dim);
+    color:var(--brown); padding:6px 16px; border-radius:20px; font-size:13px; margin-bottom:20px;
+  }
+  .cred-list{list-style:none; margin-top:24px;}
+  .cred-list li{
+    padding:14px 0; border-bottom:1px solid var(--border); color:var(--text-dim); font-size:15px;
+    display:flex; gap:12px;
+  }
+  .cred-list li::before{content:"◆"; color:var(--emerald); flex-shrink:0;}
+
+  /* pain */
+  .pain-list{display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+  .pain-card{
+    background:var(--card); border:1px solid var(--border); border-radius:14px; padding:28px;
+    transition: transform .3s ease, border-color .3s ease;
+  }
+  .pain-card:hover{transform:translateY(-4px); border-color:var(--tourmaline);}
+  .pain-card p{color:var(--text-dim); font-size:16px; font-style:italic;}
+  .pain-card .quote-mark{color:var(--tourmaline); font-size:28px; line-height:1;}
+
+  /* not esoteric */
+  .not-eso{
+    background:linear-gradient(135deg, rgba(47,212,139,0.06), rgba(79,163,247,0.06));
+    border:1px solid var(--border); border-radius:20px; padding:56px;
+    text-align:center;
+  }
+  .not-eso h2{font-size:30px; margin-bottom:24px;}
+  .not-eso p{color:var(--text-dim); font-size:17px; max-width:720px; margin:0 auto 16px;}
+
+  /* solution / how it works */
+  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:28px;}
+  .step-card{
+    background:var(--card); border:1px solid var(--border); border-radius:14px; padding:28px;
+    position:relative;
+  }
+  .step-num{
+    font-size:14px; color:var(--brown); border:1px solid var(--brown-dim); border-radius:50%;
+    width:32px; height:32px; display:flex; align-items:center; justify-content:center; margin-bottom:16px;
+  }
+  .step-card h3{font-size:19px; margin-bottom:10px;}
+  .step-card p{color:var(--text-dim); font-size:15px;}
+
+  /* features */
+  .feature-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:24px;}
+  .feature-card{
+    padding:28px; border-radius:14px; border:1px solid var(--border);
+    background:var(--card);
+    transition: box-shadow .3s ease;
+  }
+  .feature-card:hover{box-shadow:0 10px 40px rgba(79,163,247,0.12);}
+  .feature-card .icon{font-size:24px; margin-bottom:14px;}
+  .feature-card h3{font-size:18px; margin-bottom:8px;}
+  .feature-card p{color:var(--text-dim); font-size:15px;}
+
+  /* program */
+  .program-path{
+    display:flex; flex-wrap:wrap; gap:14px; margin-top:16px;
+  }
+  .arcana-chip{
+    background:var(--card); border:1px solid var(--border); border-radius:10px;
+    padding:14px 18px; font-size:14px; color:var(--text-dim); min-width:150px;
+    display:flex; align-items:center; gap:10px;
+    transition: border-color .25s ease, transform .25s ease;
+  }
+  .arcana-chip:hover{border-color:var(--emerald); transform:translateY(-3px); color:var(--beige);}
+  .arcana-chip .n{color:var(--sapphire); font-weight:600;}
+
+  /* fit / not fit */
+  .fit-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+  .fit-card{border-radius:14px; padding:28px; border:1px solid var(--border);}
+  .fit-card.yes{background:rgba(47,212,139,0.06);}
+  .fit-card.no{background:rgba(255,127,176,0.05);}
+  .fit-card h3{margin-bottom:18px; font-size:19px;}
+  .fit-card ul{list-style:none;}
+  .fit-card li{padding:8px 0; color:var(--text-dim); font-size:15px; display:flex; gap:10px;}
+  .fit-card.yes li::before{content:"✓"; color:var(--emerald);}
+  .fit-card.no li::before{content:"—"; color:var(--tourmaline);}
+
+  /* pricing */
+  .price-grid{display:grid; grid-template-columns:1fr 1fr; gap:28px;}
+  .price-card{
+    background:var(--card); border:1px solid var(--border); border-radius:16px; padding:36px;
+    transition: transform .3s ease;
+  }
+  .price-card.highlight{border-color:var(--emerald); position:relative;}
+  .price-card.highlight::before{
+    content:"Выгоднее"; position:absolute; top:-14px; right:24px;
+    background:var(--emerald); color:#0e0e0e; padding:4px 14px; border-radius:20px; font-size:12px;
+  }
+  .price-card:hover{transform:translateY(-4px);}
+  .price-card h3{font-size:18px; color:var(--brown); margin-bottom:10px;}
+  .price-card .price{font-size:38px; margin-bottom:6px;}
+  .price-card .old-price{color:var(--text-dim); text-decoration:line-through; font-size:16px; margin-bottom:16px;}
+  .price-card p.desc{color:var(--text-dim); font-size:14px; margin-bottom:24px;}
+  .price-card .cta-primary{width:100%; text-align:center; padding:16px;}
+  .guarantee-box{
+    margin-top:32px; padding:20px 24px; border:1px dashed var(--brown-dim); border-radius:12px;
+    color:var(--text-dim); font-size:14px;
+  }
+
+  /* quiz placeholder */
+  .quiz-block{
+    text-align:center; border:1px dashed var(--brown-dim); border-radius:16px; padding:48px;
+    background:rgba(169,138,99,0.04);
+  }
+  .quiz-block h3{margin-bottom:12px;}
+  .quiz-block p{color:var(--text-dim); font-size:15px;}
+
+  /* faq */
+  .faq-item{border-bottom:1px solid var(--border); padding:22px 0; cursor:pointer;}
+  .faq-q{display:flex; justify-content:space-between; align-items:center; font-size:17px;}
+  .faq-q .plus{color:var(--emerald); transition:transform .3s ease; font-size:20px;}
+  .faq-item.open .plus{transform:rotate(45deg);}
+  .faq-a{
+    max-height:0; overflow:hidden; transition:max-height .35s ease, padding .35s ease;
+    color:var(--text-dim); font-size:15px;
+  }
+  .faq-item.open .faq-a{max-height:300px; padding-top:14px;}
+
+  /* form / contacts */
+  .form-wrap{
+    background:var(--card); border:1px solid var(--border); border-radius:20px; padding:48px;
+    display:grid; grid-template-columns:1fr 1fr; gap:48px;
+  }
+  .form-field{margin-bottom:18px;}
+  .form-field label{display:block; font-size:13px; color:var(--text-dim); margin-bottom:8px;}
+  .form-field input, .form-field textarea{
+    width:100%; background:var(--bg2); border:1px solid var(--border); border-radius:8px;
+    padding:14px; color:var(--beige); font-family:inherit; font-size:15px;
+  }
+  .form-field input:focus, .form-field textarea:focus{outline:none; border-color:var(--emerald);}
+  .submit-btn{
+    width:100%; background:linear-gradient(90deg, var(--emerald), var(--sapphire));
+    color:#0e0e0e; border:none; padding:16px; border-radius:40px; font-size:16px; cursor:pointer;
+    font-family:inherit; transition:transform .2s ease;
+  }
+  .submit-btn:hover{transform:translateY(-2px);}
+  .contact-links{display:flex; flex-direction:column; gap:16px; margin-top:24px;}
+  .contact-link{
+    display:flex; align-items:center; gap:12px; padding:14px 18px; border:1px solid var(--border);
+    border-radius:12px; transition: border-color .2s ease;
+  }
+  .contact-link:hover{border-color:var(--sapphire);}
+
+  footer{
+    text-align:center; padding:40px 24px; color:var(--text-dim); font-size:13px;
+    border-top:1px solid var(--border);
+  }
+
+  @media (max-width:860px){
+    .hero-grid, .about-grid, .form-wrap, .fit-grid, .price-grid{grid-template-columns:1fr;}
+    .pain-list, .feature-grid, .steps{grid-template-columns:1fr;}
+    .hero h1{font-size:32px;}
+    section{padding:70px 0;}
+    .hero-photo{max-width:320px; margin:0 auto;}
+    .stats-row{justify-content:space-between; gap:20px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <div class="brand script">Nelumbosolar</div>
+    <a href="#form" class="nav-cta">Записаться</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow">Курс развития личности</div>
+      <h1>Путешествие к <span class="gem-text">Самости</span></h1>
+      <p class="quote">«БЫТЬ СОБОЙ создаёт больше лёгкости и радости для всех, включая меня» — Юнг</p>
+      <p class="lead">Авторская программа Адели Лоскутовой: 22 архетипа как карта возвращения к себе — научно, телесно, честно.</p>
+      <div>
+        <a href="#form" class="cta-primary">Записаться на консультацию</a>
+        <a href="#pricing" class="cta-secondary">Купить курс</a>
+      </div>
+      <div class="stats-row">
+        <div class="stat">
+          <span class="num">9 лет</span>
+          <span class="label">практики</span>
+        </div>
+        <div class="stat sapphire">
+          <span class="num">7000+</span>
+          <span class="label">консультаций</span>
+        </div>
+        <div class="stat tourmaline">
+          <span class="num">1000+</span>
+          <span class="label">клиентов</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <div class="ph-label">[ФОТО АДЕЛИ — заглушка,<br>будет предоставлено]</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container about-grid">
+    <div class="reveal">
+      <div class="badge-title">Специалист по росту качества жизни</div>
+      <h2 class="section-title">Аделя Лоскутова</h2>
+      <p style="color:var(--text-dim); font-size:16px;">
+        Психолог, автор курса «Путешествие к Самости». Помогаю женщинам вспомнить свою природу,
+        воссоздать внутренние опоры, ведущие к реализации сути, проявлению силы творчества
+        и росту качества жизни.
+      </p>
+    </div>
+    <div class="reveal">
+      <h3 style="font-size:18px; margin-bottom:6px; color:var(--brown);">Дипломы</h3>
+      <ul class="cred-list">
+        <li>Телесно-ориентированная терапия в психологическом консультировании</li>
+        <li>Клиническая психология, психологическая диагностика и психотерапия</li>
+        <li>Профессиональные основы педагогической деятельности</li>
+        <li>Арт-терапия в работе с женщинами: беременность, материнство, связь с родом</li>
+      </ul>
+      <h3 style="font-size:18px; margin:24px 0 6px; color:var(--brown);">Сертификаты</h3>
+      <ul class="cred-list">
+        <li>Аксесс Коншеснесс: аксесс барс, телесные процессы, основа</li>
+        <li>Тета-хилинг: базовый, продвинутый, игра жизни</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN -->
+<section style="background:var(--bg2);">
+  <div class="container">
+    <div class="reveal">
+      <div class="eyebrow">Знакомо?</div>
+      <h2 class="section-title">«Я уже пробовала — не помогло»</h2>
+      <p class="section-sub">Это честный вопрос, и он заслуживает честного ответа, а не полированного обещания чуда.</p>
+    </div>
+    <div class="pain-list">
+      <div class="pain-card reveal"><span class="quote-mark">“</span><p>Я уже это проходила, мне не помогло.</p></div>
+      <div class="pain-card reveal"><span class="quote-mark">“</span><p>Боюсь снова потратить время и деньги впустую.</p></div>
+      <div class="pain-card reveal"><span class="quote-mark">“</span><p>Придётся идти сквозь страхи и ещё платить за это? Пусть само как-нибудь изменится.</p></div>
+      <div class="pain-card reveal"><span class="quote-mark">“</span><p>Мне поздно что-либо менять.</p></div>
+      <div class="pain-card reveal"><span class="quote-mark">“</span><p>Боюсь осуждения и насмешек близких, если начну меняться.</p></div>
+      <div class="pain-card reveal"><span class="quote-mark">“</span><p>Это всё не сработает — я не верю в такое.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- NOT ESOTERIC -->
+<section>
+  <div class="container">
+    <div class="not-eso reveal">
+      <h2>Это <span class="gem-text">не гадание</span> и не эзотерика</h2>
+      <p>Таро здесь — не предсказание будущего, а язык психологических архетипов: 22 образа человеческого пути,
+        через которые удобно и точно говорить о реальных жизненных ситуациях.</p>
+      <p>Аксесс Коншеснесс и Тета-хилинг применяются через призму телесно-ориентированной и клинической
+        психологии — без «шизотерического» флёра, с конкретным, измеримым результатом после каждой сессии.</p>
+      <p style="color:var(--beige); font-style:italic;">Наука о душе и теле — а не гадательная практика.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION / HOW IT WORKS -->
+<section style="background:var(--bg2);">
+  <div class="container">
+    <div class="reveal">
+      <div class="eyebrow">Как это устроено</div>
+      <h2 class="section-title">Формат курса</h2>
+      <p class="section-sub">Онлайн-созвоны один на один: теория архетипа, практика проживания, разбор вашей личной ситуации.</p>
+    </div>
+    <div class="steps">
+      <div class="step-card reveal">
+        <div class="step-num">1</div>
+        <h3>Онлайн-встреча</h3>
+        <p>Созвон с теорией архетипа, телесной и психологической практикой, разбором вашей текущей ситуации.</p>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-num">2</div>
+        <h3>Интеграция</h3>
+        <p>Работа с конкретным архетипом (например, Шут, Маг) через практику — не абстракция, а прикладной инструмент.</p>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-num">3</div>
+        <h3>Конспект</h3>
+        <p>После каждой встречи — электронный конспект с описанием архетипа и практическими рекомендациями.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section>
+  <div class="container">
+    <div class="reveal">
+      <div class="eyebrow">Почему в этот раз получится</div>
+      <h2 class="section-title">Уникальная методология</h2>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card reveal"><div class="icon">◆</div><h3>Многогранность инструментов</h3><p>Подбираю методику индивидуально — там, где нужен именно ваш инструмент, а не универсальный шаблон.</p></div>
+      <div class="feature-card reveal"><div class="icon">◆</div><h3>Научная база</h3><p>Клиническая и телесно-ориентированная психология снимают флёр эзотерики с любых техник.</p></div>
+      <div class="feature-card reveal"><div class="icon">◆</div><h3>Быстрый, измеримый результат</h3><p>Конкретные сдвиги после каждой сессии, а не абстрактное «когда-нибудь полегчает».</p></div>
+      <div class="feature-card reveal"><div class="icon">◆</div><h3>Без стыда и осуждения</h3><p>В своём темпе, без давления и самоклеймения ярлыками и диагнозами.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAM -->
+<section style="background:var(--bg2);">
+  <div class="container">
+    <div class="reveal">
+      <div class="eyebrow">Путь героя</div>
+      <h2 class="section-title">Программа: 22 архетипа</h2>
+      <p class="section-sub">Последовательность арканов — естественная рамка целостного путешествия, а не разрозненных встреч.</p>
+    </div>
+    <div class="program-path">
+      <div class="arcana-chip reveal"><span class="n">0</span> Шут</div>
+      <div class="arcana-chip reveal"><span class="n">I</span> Маг</div>
+      <div class="arcana-chip reveal"><span class="n">II</span> Жрица</div>
+      <div class="arcana-chip reveal"><span class="n">III</span> Императрица</div>
+      <div class="arcana-chip reveal"><span class="n">IV</span> Император</div>
+      <div class="arcana-chip reveal"><span class="n">…</span> ещё 17 архетипов</div>
+      <div class="arcana-chip reveal"><span class="n">XXI</span> Мир</div>
+    </div>
+    <p style="color:var(--text-dim); font-size:13px; margin-top:16px;">[Иллюстрации архетипов — заглушка, будут добавлены]</p>
+  </div>
+</section>
+
+<!-- FIT -->
+<section>
+  <div class="container">
+    <div class="reveal">
+      <h2 class="section-title">Кому подходит курс</h2>
+    </div>
+    <div class="fit-grid">
+      <div class="fit-card yes reveal">
+        <h3>Это для вас, если</h3>
+        <ul>
+          <li>Готовы честно посмотреть на себя, даже если это непросто</li>
+          <li>Хотите понять свои паттерны, а не просто «погадать»</li>
+          <li>Уже пробовали что-то — и хотите системный, а не разовый результат</li>
+          <li>Готовы в своём темпе, без гонки и стыда</li>
+        </ul>
+      </div>
+      <div class="fit-card no reveal">
+        <h3>Это не для вас, если</h3>
+        <ul>
+          <li>Ищете гадание «что будет завтра»</li>
+          <li>Ждёте результата без какого-либо участия с вашей стороны</li>
+          <li>Не готовы уделять время регулярным встречам</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" style="background:var(--bg2);">
+  <div class="container">
+    <div class="reveal">
+      <div class="eyebrow">Стоимость</div>
+      <h2 class="section-title">Цены и тарифы</h2>
+    </div>
+    <div class="price-grid">
+      <div class="price-card reveal">
+        <h3>Одна сессия</h3>
+        <div class="price">3 500 ₽</div>
+        <p class="desc">Оплата за каждую встречу отдельно — если хотите попробовать без обязательств.</p>
+        <a href="#form" class="cta-primary" style="display:block;">Записаться на сессию</a>
+      </div>
+      <div class="price-card highlight reveal">
+        <h3>Весь курс — 22 сессии</h3>
+        <div class="old-price">77 000 ₽</div>
+        <div class="price">66 000 ₽</div>
+        <p class="desc">Полное прохождение всех архетипов со скидкой при единовременной оплате.</p>
+        <a href="#form" class="cta-primary" style="display:block;">Купить курс</a>
+      </div>
+    </div>
+    <div class="guarantee-box reveal">
+      Пройдите первые 2–3 сессии — и если почувствуете, что курс не ваш, вернём деньги
+      за оставшиеся сессии по цене 3 500 ₽ каждая.
+    </div>
+  </div>
+</section>
+
+<!-- QUIZ PLACEHOLDER -->
+<section>
+  <div class="container">
+    <div class="quiz-block reveal">
+      <h3>Не знаете, с чего начать?</h3>
+      <p>Здесь появится короткий квиз, который поможет подобрать формат под ваш запрос. (В разработке)</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section style="background:var(--bg2);">
+  <div class="container">
+    <div class="reveal">
+      <h2 class="section-title">Частые вопросы</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <div class="faq-q"><span>Это гадание на картах?</span><span class="plus">+</span></div>
+        <div class="faq-a">Нет. Таро используется как язык архетипов для психологической работы, а не для предсказания будущего.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q"><span>Я уже пробовала терапию/эзотерику — почему сейчас будет иначе?</span><span class="plus">+</span></div>
+        <div class="faq-a">Методология сочетает научную психологию с телесными практиками и даёт измеримый результат после каждой сессии — это не разовая техника, а системная работа с вашим запросом.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q"><span>Сколько длится курс?</span><span class="plus">+</span></div>
+        <div class="faq-a">22 сессии — по числу архетипов таро, периодичность встреч согласовывается индивидуально.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q"><span>Что если пойму, что это не моё?</span><span class="plus">+</span></div>
+        <div class="faq-a">При оплате всего курса — вернём деньги за оставшиеся сессии по цене 3 500 ₽ каждая.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q"><span>Формат онлайн или очно?</span><span class="plus">+</span></div>
+        <div class="faq-a">Курс проходит онлайн. Аделя также работает очно и дистанционно по индивидуальным запросам.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT / FORM -->
+<section id="form">
+  <div class="container">
+    <div class="reveal">
+      <div class="eyebrow">Начать путь</div>
+      <h2 class="section-title">Запишитесь на консультацию</h2>
+    </div>
+    <div class="form-wrap reveal">
+      <form onsubmit="event.preventDefault(); alert('Форма — заглушка для демонстрации. Отправка будет подключена на email + мессенджер.');">
+        <div class="form-field">
+          <label>Имя</label>
+          <input type="text" placeholder="Как к вам обращаться" required>
+        </div>
+        <div class="form-field">
+          <label>Телефон или Telegram</label>
+          <input type="text" placeholder="+7 ... или @username" required>
+        </div>
+        <div class="form-field">
+          <label>Комментарий</label>
+          <textarea rows="3" placeholder="Коротко о вашем запросе (необязательно)"></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Отправить заявку</button>
+      </form>
+      <div>
+        <p style="color:var(--text-dim); font-size:15px; margin-bottom:20px;">
+          Или напишите напрямую — так тоже можно:
+        </p>
+        <div class="contact-links">
+          <a href="#" class="contact-link">✈️ Telegram</a>
+          <a href="#" class="contact-link">💬 MAX</a>
+          <a href="mailto:hello@nelumbosolar.ru" class="contact-link">✉️ hello@nelumbosolar.ru</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="script" style="font-size:22px; margin-bottom:10px;">Nelumbosolar</div>
+  <p>Аделя Лоскутова — «Путешествие к Самости» · 2026</p>
+</footer>
+
+<script>
+  // scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.12});
+  revealEls.forEach(el=>io.observe(el));
+
+  // faq accordion
+  document.querySelectorAll('.faq-item').forEach(item=>{
+    item.addEventListener('click', ()=>{
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+      if(!wasOpen) item.classList.add('open');
+    });
+  });
+</script>
+
+</body>
+</html>
